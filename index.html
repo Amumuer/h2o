@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body style="font-size: 16px;">
+<div class="index">
+    <div class="container">
+        <div class="line display"></div>
+        <div class="line display line2"></div>
+        <div class="wave">
+            <i></i>
+            <span>58%</span>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+
+    $(function () {
+        var px=-0.67;
+        var score=58;
+        var timer,timer2;
+        $('.wave').on('click',function () {
+            score=58;
+            clearInterval(timer)
+            clearInterval(timer2)
+            $('.line').removeClass('display')
+            var a=parseFloat($('i').css('top'))*2;
+            timer=setInterval(function () {
+                px+=0.04;
+                score--;
+                $('span').text(score+'%')
+                $('i').css({
+                    top:px+'rem'
+                })
+                if(px>=0.67){
+                    clearInterval(timer)
+                    timer2=setInterval(function () {
+                        px-=0.04;
+                        $('i').css({
+                            top:px+'rem'
+                        })
+                        if(px<=-0.5){
+                            clearInterval(timer2)
+                            $('.line').addClass('display')
+
+                        }
+                    },17)
+                }
+            },17)
+
+        })
+    })
+    //作者：Amumuer
+</script>
+</html>
